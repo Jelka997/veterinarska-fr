@@ -1,0 +1,502 @@
+@import '/src/core/global.scss';
+
+$black: #1a1a1a;
+$dark-brown: #3b2a1a;
+$brown: #6b4226;
+$light-brown: #a0724a;
+$cream: #f5efe6;
+$white: #ffffff;
+
+.patient-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    background-color: white;
+    font-size: 14px;
+    border: 1px solid black;
+    border-radius: 12px;
+    color: #ccc;
+
+    h2 {
+        color: black;
+        font-size: 15px;
+    }
+
+    .patient-divider {
+        height: 1px;
+        background: black;
+        margin: 10px 0;
+    }
+
+    .patient-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            &-full {
+                grid-column: 1/-1;
+            }
+        }
+
+        input,
+        textarea {
+            border-radius: 10px;
+            background-color: white;
+            border: 1px solid black;
+            outline: none;
+            padding: 10px 15px;
+            color: black;
+
+            &:focus {
+                border-color: rgb(180, 255, 225);
+            }
+
+            &::placeholder {
+                color: #666;
+            }
+        }
+
+        textarea {
+            margin-top: 5px;
+            width: 100%;
+            min-width: 100%;
+            max-width: 100%;
+            resize: none;
+        }
+
+        label {
+            color: black;
+        }
+    }
+
+    .patient-form-actions {
+        display: flex;
+        gap: 15px;
+        margin-top: 5px;
+
+        button {
+            flex: 1;
+            padding: 10px;
+            border-radius: 20px;
+            border: none;
+            font-size: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 300ms ease;
+        }
+
+        .btn-submit {
+            background: rgb(131, 98, 98);
+            border-radius: 10px;
+            padding: 10px;
+
+            &:hover:not(:disabled) {
+                background: #27ae60;
+                box-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
+                transform: translateY(-1px);
+            }
+
+            &:disabled {
+                background-color: rgb(131, 98, 98);
+                cursor: not-allowed;
+            }
+        }
+
+        button:not(.btn-submit) {
+            background: rgb(131, 98, 98);
+            border-radius: 10px;
+
+            &:hover:not(:disabled) {
+                box-shadow: 0 0 8px rgba(231, 76, 60, 0.7);
+                transform: translateY(-1px);
+            }
+
+            &:disabled {
+                background-color: rgb(131, 98, 98);
+                cursor: not-allowed;
+            }
+        }
+    }
+
+    .error {
+        color: rgb(131, 98, 98);
+        margin-bottom: 15px;
+        font-size: 10px;
+    }
+
+    .success {
+        color: rgb(131, 98, 98);
+        margin-bottom: 15px;
+        font-size: 10px;
+    }
+}
+
+#go-back {
+    color: $dark-brown;
+    margin: 20px;
+    background: none;
+    border: none;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+    &:hover {
+        transform: scale(1.08);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+}
+
+.btn-wrap {
+    padding: 10px;
+}
+
+.btn-add {
+    background: rgb(131, 98, 98);
+    border: 1px solid rgb(131, 98, 98);
+    border-radius: 10px;
+    padding: 10px;
+    transition: all 0.3s ease-in-out;
+    color: whitesmoke;
+
+    &:hover:not(:disabled) {
+        border-color: rgb(131, 98, 98);
+        box-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
+        transform: translateY(-1px);
+    }
+
+    &:disabled {
+        background-color: rgb(131, 98, 98);
+        cursor: not-allowed;
+    }
+}
+
+.patients-page {
+    background-color: $white;
+    min-height: 100vh;
+    padding: 2rem;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.patients-layout {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+// SIDEBAR
+.patients-sidebar {
+    width: 260px;
+    min-width: 260px;
+    background-color: $dark-brown;
+    border-radius: 12px;
+    border: 1px solid $black;
+    padding: 1.5rem;
+    position: sticky;
+    top: 2rem;
+
+    h1 {
+        color: $white;
+        font-size: 1.5rem;
+        font-weight: 700;
+        border-left: 4px solid $brown;
+        padding-left: 0.75rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+
+    label {
+        color: $light-brown;
+        font-size: 0.8rem;
+        margin-bottom: 0.3rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    input {
+        padding: 0.6rem 0.75rem;
+        border-radius: 8px;
+        border: 1px solid $brown;
+        background-color: $white;
+        color: $black;
+        font-size: 0.9rem;
+        outline: none;
+        transition: border 0.2s;
+
+        &::placeholder {
+            color: $light-brown;
+        }
+
+        &:focus {
+            border-color: $light-brown;
+        }
+
+        &[type="number"] {
+            -moz-appearance: textfield;
+
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+            }
+        }
+    }
+}
+
+.btn-search,
+.btn-reset {
+    width: 100%;
+    padding: 0.65rem;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 0.5rem;
+}
+
+.btn-search {
+    background-color: $brown;
+    color: $white;
+
+    &:hover {
+        background-color: $light-brown;
+    }
+}
+
+.btn-reset {
+    background-color: transparent;
+    border: 1px solid $brown;
+    color: $light-brown;
+
+    &:hover {
+        background-color: $dark-brown;
+    }
+}
+
+// CONTENT
+.patients-content {
+    flex: 1;
+}
+
+.patients-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+// PATIENT CARD
+.patient-card {
+    background-color: $white;
+    border-radius: 12px;
+    border: 1px solid $brown;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        border-color: $light-brown;
+    }
+}
+
+.patient-card-content {
+    padding: 1.25rem;
+
+    .patient-card-name {
+        color: $dark-brown;
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        border-bottom: 1px solid $brown;
+        padding-bottom: 0.5rem;
+    }
+
+    >p {
+        color: $dark-brown;
+        font-size: 0.85rem;
+        margin: 0.3rem 0;
+    }
+
+    .patient-card-vet {
+        color: $light-brown;
+        font-size: 0.8rem;
+        margin-top: 0.5rem;
+        font-style: italic;
+    }
+}
+
+// PAGINATION
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    span {
+        color: $cream;
+        font-size: 0.9rem;
+    }
+
+    button {
+        padding: 0.6rem 1.5rem;
+        border-radius: 8px;
+        border: 1px solid $brown;
+        background-color: $dark-brown;
+        color: $white;
+        cursor: pointer;
+        transition: background-color 0.2s;
+
+        &:hover:not(:disabled) {
+            background-color: $brown;
+        }
+
+        &:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+    }
+}
+
+
+.patient-details {
+    background-color: $white;
+    border: 1px solid $brown;
+    border-radius: 12px;
+
+    padding: 20px;
+    max-width: 600px;
+
+    margin: 20px auto;
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+
+    h2 {
+        color: $dark-brown;
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+        border-bottom: 1px solid $brown;
+        padding-bottom: 10px;
+    }
+
+    p {
+        color: $dark-brown;
+        font-size: 0.95rem;
+        margin: 8px 0;
+
+        b {
+            color: $brown;
+        }
+    }
+
+    button {
+        margin-top: 12px;
+        margin-right: 10px;
+
+        padding: 10px 14px;
+        border-radius: 8px;
+        border: 1px solid $brown;
+
+        background-color: $dark-brown;
+        color: $white;
+
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+            background-color: $brown;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+    }
+
+    #go-back {
+        background: transparent;
+        color: $dark-brown;
+        border: none;
+        margin-top: 15px;
+
+        &:hover {
+            background: transparent;
+            box-shadow: none;
+            transform: scale(1.05);
+        }
+    }
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    background: rgba(0, 0, 0, 0.6);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999;
+}
+
+.modal {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+
+    min-width: 300px;
+    text-align: center;
+
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+
+    .modal-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+        justify-content: center;
+
+        button {
+            flex: 1;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid $brown;
+            background-color: $dark-brown;
+            color: $white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+
+            &:hover {
+                background-color: $brown;
+                transform: translateY(-2px);
+                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            }
+
+            &:last-child {
+                background-color: transparent;
+                color: $dark-brown;
+                border-color: $brown;
+
+                &:hover {
+                    background-color: $cream;
+                    box-shadow: none;
+                }
+            }
+        }
+    }
+}

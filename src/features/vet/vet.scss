@@ -1,0 +1,114 @@
+@import '/src/core/global.scss';
+
+$black: #1a1a1a;
+$dark-brown: #3b2a1a;
+$brown: #6b4226;
+$light-brown: #a0724a;
+$cream: #f5efe6;
+$white: #ffffff;
+
+.dashboard-wrap {
+  h2 {
+    margin: 50px;
+    text-align: center;
+  }
+
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    padding: 0 20px;
+  }
+
+  .dashboard-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid #e0e0e0;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+      border-color: #2ecc71;
+      background: #f0fff4;
+    }
+
+    .card-icon {
+      font-size: 2.5rem;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    h3 {
+      margin: 0.5rem 0;
+      color: #222;
+    }
+
+    p {
+      color: #666;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+.vets-page {
+    background-color: $white;
+    min-height: 100vh;
+    padding: 2rem;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.vets-layout {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.vets-content {
+    flex: 1;
+}
+
+.vets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.vet-card {
+    background-color: $white;
+    border-radius: 12px;
+    border: 1px solid $brown;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        border-color: $light-brown;
+    }
+}
+
+.vet-card-content {
+    padding: 1.25rem;
+
+    .patient-card-name {
+        color: $dark-brown;
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        border-bottom: 1px solid $brown;
+        padding-bottom: 0.5rem;
+    }
+
+    >p {
+        color: $dark-brown;
+        font-size: 0.85rem;
+        margin: 0.3rem 0;
+    }
+}

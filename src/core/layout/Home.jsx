@@ -1,40 +1,29 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import UserContext from '../../UserContext';
 import '../../core/global.scss';
 import './layout.scss';
+import {getRole} from '../../utils/auth';
 
 const Home = () => {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
+  const role = getRole(user);
+
+  useEffect(() => {
+    if (user) {
+      if (role === 'Vet' || role === 'Assistant') navigate('/vet-assistant');
+    }
+  }, [user]);
 
   return (
     <div className="home-container">
       <h1>Dobrodošli!</h1>
-      
-      {user ? (
-        <div>
-          <p className="welcome-text">
-            Zdravo, <strong>{user.sub}</strong>! 
-            Uspešno si prijavljen/a.
-          </p>
-        </div>
-      ) : (
-        <div>
-          <p className="welcome-text">
-            Prijavi se da pristupiš funkcionalnostima.
-          </p>
-        </div>
+      {!user && (
+        <p className="welcome-text">
+          Prijavi se da pristupiš funkcionalnostima.
+        </p>
       )}
-      
-      <div className="features-box">
-        <h2>Postojeće funkcionalnosti:</h2>
-        <ul>
-          <li>Registracija novih korisnika</li>
-          <li>Prijava i odjava</li>
-          <li>Interceptor za automatsko slanje JWT tokena</li>
-          <li>Čitanje username i role u Header komponenti</li>
-        </ul>
-      </div>
     </div>
   );
 };
